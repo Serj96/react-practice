@@ -26,12 +26,16 @@ class Users extends Component {
     this.setState((prevState) => ({ users: [...prevState.users, newUser] }));
   };
 
+  handelDelete = (id) => {
+    this.setState((prevState) => ({ users: prevState.users.filter(user => user.id !== id) }));
+  }
+
   render() {
     const { users } = this.state;
     return (
       <>
         <UserForm onHandleSubmit={this.handleSubmit} />
-        <>{users.length > 0 && <UserList users={users} />}</>
+        <>{users.length > 0 && <UserList users={users} onHandelDelete={this.handelDelete} />}</>
       </>
     );
   }
