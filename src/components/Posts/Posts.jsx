@@ -1,5 +1,8 @@
 import { Component } from "react";
 import getPosts from "services/API";
+import Loader from "components/Loader/Loader";
+import Failure from "components/Failure/Failure";
+
 export default class Posts extends Component {
   state = {
     posts: [],
@@ -33,9 +36,11 @@ export default class Posts extends Component {
     this.setState((prevState) => ({ page: prevState.page + 1 }));
   };
   render() {
-    const { posts } = this.state;
+    const { posts, loading, error } = this.state;
     return (
       <div>
+        {loading && <Loader />}
+        {error && <Failure error={error.message} />}
         {posts.length > 0 && (
           <>
             <ul>
