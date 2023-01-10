@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { nanoid } from "nanoid";
 import { UserList } from "./UserList/UserList";
-import UserForm from "./UserForm/UserForm";
+import { UserForm } from "./UserForm/UserForm";
 const STORAGE_KEY = "users";
 class Users extends Component {
   state = {
@@ -27,15 +27,21 @@ class Users extends Component {
   };
 
   handelDelete = (id) => {
-    this.setState((prevState) => ({ users: prevState.users.filter(user => user.id !== id) }));
-  }
+    this.setState((prevState) => ({
+      users: prevState.users.filter((user) => user.id !== id),
+    }));
+  };
 
   render() {
     const { users } = this.state;
     return (
       <>
         <UserForm onHandleSubmit={this.handleSubmit} />
-        <>{users.length > 0 && <UserList users={users} onHandelDelete={this.handelDelete} />}</>
+        <>
+          {users.length > 0 && (
+            <UserList users={users} onHandelDelete={this.handelDelete} />
+          )}
+        </>
       </>
     );
   }

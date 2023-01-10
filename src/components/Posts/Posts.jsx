@@ -7,7 +7,7 @@ export default class Posts extends Component {
   state = {
     posts: [],
     page: 1,
-    limit: 10,
+    limit: 30,
     loading: false,
     error: null,
   };
@@ -51,9 +51,11 @@ export default class Posts extends Component {
                 </li>
               ))}
             </ul>
-            <button type="button" onClick={this.onClickHandler}>
-              Load more
-            </button>
+            {posts.length < 100 && (
+              <button type="button" onClick={this.onClickHandler}>
+                Load more
+              </button>
+            )}
           </>
         )}
       </div>
