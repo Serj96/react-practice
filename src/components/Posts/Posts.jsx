@@ -1,20 +1,16 @@
 import getPosts from 'services/API';
 import Loader from 'components/Loader/Loader';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Failure from 'components/Failure/Failure';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchPost();
-  }, [page]);
-
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     setLoading(true);
     try {
       const data = await getPosts(page, limit);
@@ -24,10 +20,14 @@ const Posts = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, limit]);
+
+  useEffect(() => {
+    fetchPost();
+  }, [fetchPost, page]);
 
   const onClickHandler = () => {
-    setPage(prev =>  prev + 1 );
+    setPage(prev => prev + 1);
   };
 
   return (
