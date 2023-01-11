@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
-import { UserList } from "./UserList/UserList";
-import { UserForm } from "./UserForm/UserForm";
+import { useState, useEffect, useCallback } from 'react';
+import { nanoid } from 'nanoid';
+import { UserList } from './UserList/UserList';
+import { UserForm } from './UserForm/UserForm';
 
-const STORAGE_KEY = "users";
+const STORAGE_KEY = 'users';
 
 export default function Users() {
   const [users, setUsers] = useState(
@@ -13,16 +13,18 @@ export default function Users() {
     const usersToSave = JSON.stringify(users);
     localStorage.setItem(STORAGE_KEY, usersToSave);
   }, [users]);
-  const handelDelete = (id) => {
-    setUsers((prev) => prev.filter((user) => user.id !== id));
-  };
-  const handleSubmit = (user) => {
+
+  const handelDelete = useCallback(id => {
+    setUsers(prev => prev.filter(user => user.id !== id));
+  }, []);
+
+  const handleSubmit = user => {
     const newUser = { ...user, id: nanoid() };
-    setUsers((prev) => [...prev, newUser]);
+    setUsers(prev => [...prev, newUser]);
   };
   return (
     <>
-      <UserForm onHandleSubmit={handleSubmit}  />
+      <UserForm onHandleSubmit={handleSubmit} />
       <>
         {users.length > 0 && (
           <UserList users={users} onHandelDelete={handelDelete} />
