@@ -22,7 +22,7 @@ export default function Users() {
   };
   return (
     <>
-      <UserForm onHandleSubmit={handleSubmit} />
+      <UserForm onHandleSubmit={handleSubmit}  />
       <>
         {users.length > 0 && (
           <UserList users={users} onHandelDelete={handelDelete} />

@@ -1,45 +1,51 @@
-import { useState } from "react";
+import { useState, useMemo } from 'react';
+import { nanoid } from 'nanoid';
 
-export const UserForm = ({ onHandleSubmit }) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+export const UserForm = ({ onHandleSubmit, users }) => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const handleChangeName = (event) => {
+  const handleChangeName = event => {
     const { value } = event.target;
     setName(value);
   };
 
-  const handleChangePhone = (event) => {
+  const handleChangePhone = event => {
     const { value } = event.target;
     setPhone(value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     onHandleSubmit({ name, phone });
-    setName("");
-    setPhone("");
+    setName('');
+    setPhone('');
   };
+
+  // const nameInputId = nanoid();
+  // const phoneInputId = nanoid();
+
+  const nameInputId = useMemo(() => nanoid(), []);
+  const phoneInputId = useMemo(() => nanoid(), []);
+
   return (
     <form action="" onSubmit={handleSubmit}>
-      <label htmlFor="">
-        Name{" "}
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleChangeName}
-        />
-      </label>
-      <label htmlFor="">
-        Phone{" "}
-        <input
-          type="tel"
-          name="phone"
-          value={phone}
-          onChange={handleChangePhone}
-        />
-      </label>
+      <label htmlFor={nameInputId}>Name </label>
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={handleChangeName}
+        id={nameInputId}
+      />
+      <label htmlFor={phoneInputId}>Phone </label>
+      <input
+        type="tel"
+        name="phone"
+        value={phone}
+        onChange={handleChangePhone}
+        id={phoneInputId}
+      />
       <button type="submit">Add user</button>
     </form>
   );
