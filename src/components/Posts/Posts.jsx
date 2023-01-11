@@ -2,6 +2,7 @@ import getPosts from 'services/API';
 import Loader from 'components/Loader/Loader';
 import { useState, useEffect, useCallback } from 'react';
 import Failure from 'components/Failure/Failure';
+import { Section, List, Item, Title } from './Posts.styled';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -31,19 +32,20 @@ const Posts = () => {
   };
 
   return (
-    <div>
+    <Section>
+      <h1>Posts</h1>
       {loading && <Loader />}
       {error && <Failure error={error.message} />}
       {posts.length > 0 && (
         <>
-          <ul>
+          <List>
             {posts.map(({ title, body }, index) => (
-              <li key={index}>
-                <p>{title}</p>
+              <Item key={index}>
+                <Title>{title}</Title>
                 <p>{body}</p>
-              </li>
+              </Item>
             ))}
-          </ul>
+          </List>
           {posts.length < 100 && (
             <button type="button" onClick={onClickHandler}>
               Load more
@@ -51,7 +53,7 @@ const Posts = () => {
           )}
         </>
       )}
-    </div>
+    </Section>
   );
 };
 

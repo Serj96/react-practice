@@ -1,4 +1,5 @@
-import { Component } from "react";
+import { Component } from 'react';
+import { Section, Button, Item, Text } from './Basket.styled';
 
 export default class Basket extends Component {
   state = {
@@ -9,9 +10,9 @@ export default class Basket extends Component {
   total = () => {
     return Object.values(this.state).reduce((acc, num) => acc + num);
   };
-  onClick = (item) => {
+  onClick = item => {
     console.log(item);
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       [item]: prevState[item] + 1,
     }));
   };
@@ -20,29 +21,32 @@ export default class Basket extends Component {
     const options = Object.keys(this.state);
     console.log(options);
     return (
-      <div>
+      <Section>
+        <h1>Basket</h1>
         <>
-          {options.map((item) => (
-            <button key={item} type="button" onClick={() => this.onClick(item)}>
+          {options.map(item => (
+            <Button key={item} type="button" onClick={() => this.onClick(item)}>
               {item}
-            </button>
+            </Button>
           ))}
         </>
         {this.total() > 0 && (
           <ul>
-            <li>
-              Apple:<p>{apple}</p>
-            </li>
-            <li>
-              milk:<p>{milk}</p>
-            </li>
-            <li>
-              cheese:<p>{cheese}</p>
-            </li>
-            <li>total:{this.total()}</li>
+            <Item>
+              <Text>Apple: {apple}</Text>
+            </Item>
+            <Item>
+              <Text>Milk: {milk}</Text>
+            </Item>
+            <Item>
+              <Text>Cheese: {cheese}</Text>
+            </Item>
+            <Item>
+              <Text>Total: {this.total()}</Text>
+            </Item>
           </ul>
         )}
-      </div>
+      </Section>
     );
   }
 }

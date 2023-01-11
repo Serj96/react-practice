@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { nanoid } from 'nanoid';
 import { UserList } from './UserList/UserList';
 import { UserForm } from './UserForm/UserForm';
+import { Section } from './Users.styled';
 
 const STORAGE_KEY = 'users';
 
@@ -23,14 +24,15 @@ export default function Users() {
     setUsers(prev => [...prev, newUser]);
   };
   return (
-    <>
+    <Section>
+      <h1>Users</h1>
       <UserForm onHandleSubmit={handleSubmit} />
       <>
         {users.length > 0 && (
           <UserList users={users} onHandelDelete={handelDelete} />
         )}
       </>
-    </>
+    </Section>
   );
 }
 // class Users extends Component {

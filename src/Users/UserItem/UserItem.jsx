@@ -1,14 +1,15 @@
 import { memo } from 'react';
+import { Item, Data, Button } from './UserItem.styled';
 function UserItem({ name, phone, onHandelDelete, id }) {
   console.log('render:', name);
   return (
-    <div>
-      <p>{name}</p>
-      <p>{phone}</p>
-      <button type="button" onClick={() => onHandelDelete(id)}>
+    <Item>
+      <Data>{name}:</Data>
+      <Data>{phone}</Data>
+      <Button type="button" onClick={() => onHandelDelete(id)}>
         Delete
-      </button>
-    </div>
+      </Button>
+    </Item>
   );
 }
 export default memo(UserItem);

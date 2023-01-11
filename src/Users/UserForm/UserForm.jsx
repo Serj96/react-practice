@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { nanoid } from 'nanoid';
+import { Input, Label, Button } from './UserForm.styled';
 
 export const UserForm = ({ onHandleSubmit, users }) => {
   const [name, setName] = useState('');
@@ -22,31 +23,28 @@ export const UserForm = ({ onHandleSubmit, users }) => {
     setPhone('');
   };
 
-  // const nameInputId = nanoid();
-  // const phoneInputId = nanoid();
-
   const nameInputId = useMemo(() => nanoid(), []);
   const phoneInputId = useMemo(() => nanoid(), []);
 
   return (
     <form action="" onSubmit={handleSubmit}>
-      <label htmlFor={nameInputId}>Name </label>
-      <input
+      <Label htmlFor={nameInputId}>Name </Label>
+      <Input
         type="text"
         name="name"
         value={name}
         onChange={handleChangeName}
         id={nameInputId}
       />
-      <label htmlFor={phoneInputId}>Phone </label>
-      <input
+      <Label htmlFor={phoneInputId}>Phone </Label>
+      <Input
         type="tel"
         name="phone"
         value={phone}
         onChange={handleChangePhone}
         id={phoneInputId}
       />
-      <button type="submit">Add user</button>
+      <Button type="submit">Add user</Button>
     </form>
   );
 };
