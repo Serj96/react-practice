@@ -1,30 +1,33 @@
 import { useState, useMemo } from 'react';
 import { nanoid } from 'nanoid';
+import useForm from 'hooks/useForm';
 import { Input, Label, Button } from './UserForm.styled';
 
-export const UserForm = ({ onHandleSubmit, users }) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+const initialState = { name: '', phone: '' };
 
-  const handleChangeName = event => {
-    const { value } = event.target;
-    setName(value);
-  };
+export const UserForm = ({ onSubmit }) => {
+  const { state, handleChange, handleSubmit } = useForm({
+    initialState,
+    onSubmit,
+  });
 
-  const handleChangePhone = event => {
-    const { value } = event.target;
-    setPhone(value);
-  };
+  // const [state, setState] = useState(initialState);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    onHandleSubmit({ name, phone });
-    setName('');
-    setPhone('');
-  };
+  // const handleChange = event => {
+  //   const { value, name } = event.target;
+  //   setState(prevState => ({ ...prevState, [name]: value }));
+  // };
+
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   onSubmit(state);
+  //   setState(initialState);
+  // };
 
   const nameInputId = useMemo(() => nanoid(), []);
   const phoneInputId = useMemo(() => nanoid(), []);
+
+  const { name, phone } = state;
 
   return (
     <form action="" onSubmit={handleSubmit}>
@@ -33,7 +36,7 @@ export const UserForm = ({ onHandleSubmit, users }) => {
         type="text"
         name="name"
         value={name}
-        onChange={handleChangeName}
+        onChange={handleChange}
         id={nameInputId}
       />
       <Label htmlFor={phoneInputId}>Phone </Label>
@@ -41,7 +44,7 @@ export const UserForm = ({ onHandleSubmit, users }) => {
         type="tel"
         name="phone"
         value={phone}
-        onChange={handleChangePhone}
+        onChange={handleChange}
         id={phoneInputId}
       />
       <Button type="submit">Add user</Button>

@@ -26,7 +26,7 @@ export default function Users() {
   return (
     <Section>
       <h1>Users</h1>
-      <UserForm onHandleSubmit={handleSubmit} />
+      <UserForm onSubmit={handleSubmit} />
       <>
         {users.length > 0 && (
           <UserList users={users} onHandelDelete={handelDelete} />

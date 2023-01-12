@@ -1,15 +1,25 @@
 import { useState } from 'react';
+import useForm from 'hooks/useForm';
+
+const initialState = { name: '', email: '' };
+
 export default function AuthForm({ onSubmit }) {
-  const [state, setState] = useState({ name: '', email: '' });
-  const handleChange = event => {
-    const { name, value } = event.currentTarget;
-    setState(prev => ({ ...prev, [name]: value }));
-  };
-  const handleSubmit = event => {
-    event.preventDefault();
-    onSubmit(state);
-    setState({ name: '', email: '' });
-  };
+  const { state, handleChange, handleSubmit } = useForm({
+    initialState,
+    onSubmit,
+  });
+
+  // const [state, setState] = useState(initialState);
+
+  // const handleChange = event => {
+  //   const { name, value } = event.currentTarget;
+  //   setState(prev => ({ ...prev, [name]: value }));
+  // };
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   onSubmit(state);
+  //   setState(initialState);
+  // };
   return (
     <>
       <form onSubmit={handleSubmit}>
