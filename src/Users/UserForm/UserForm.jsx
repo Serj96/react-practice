@@ -2,6 +2,9 @@ import { useState, useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import useForm from 'hooks/useForm';
 import { Input, Label, Button } from './UserForm.styled';
+import { useContext } from 'react';
+import { LangContext } from 'context/context';
+import content from '../../content/content.json';
 
 const initialState = { name: '', phone: '' };
 
@@ -24,6 +27,8 @@ export const UserForm = ({ onSubmit }) => {
   //   setState(initialState);
   // };
 
+  const { lang } = useContext(LangContext);
+
   const nameInputId = useMemo(() => nanoid(), []);
   const phoneInputId = useMemo(() => nanoid(), []);
 
@@ -31,7 +36,7 @@ export const UserForm = ({ onSubmit }) => {
 
   return (
     <form action="" onSubmit={handleSubmit}>
-      <Label htmlFor={nameInputId}>Name </Label>
+      <Label htmlFor={nameInputId}>{content.name[lang]}</Label>
       <Input
         type="text"
         name="name"
@@ -39,7 +44,7 @@ export const UserForm = ({ onSubmit }) => {
         onChange={handleChange}
         id={nameInputId}
       />
-      <Label htmlFor={phoneInputId}>Phone </Label>
+      <Label htmlFor={phoneInputId}>{content.phone[lang]}</Label>
       <Input
         type="tel"
         name="phone"
@@ -47,7 +52,7 @@ export const UserForm = ({ onSubmit }) => {
         onChange={handleChange}
         id={phoneInputId}
       />
-      <Button type="submit">Add user</Button>
+      <Button type="submit">{content.add[lang]}</Button>
     </form>
   );
 };

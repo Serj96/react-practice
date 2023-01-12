@@ -3,6 +3,9 @@ import { nanoid } from 'nanoid';
 import { UserList } from './UserList/UserList';
 import { UserForm } from './UserForm/UserForm';
 import { Section } from './Users.styled';
+import { useContext } from 'react';
+import { LangContext } from 'context/context';
+import content from '../content/content.json';
 
 const STORAGE_KEY = 'users';
 
@@ -15,6 +18,8 @@ export default function Users() {
     localStorage.setItem(STORAGE_KEY, usersToSave);
   }, [users]);
 
+  const { lang } = useContext(LangContext);
+
   const handelDelete = useCallback(id => {
     setUsers(prev => prev.filter(user => user.id !== id));
   }, []);
@@ -25,7 +30,7 @@ export default function Users() {
   };
   return (
     <Section>
-      <h1>Users</h1>
+      <h1>{content.title[lang]}</h1>
       <UserForm onSubmit={handleSubmit} />
       <>
         {users.length > 0 && (

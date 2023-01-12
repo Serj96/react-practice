@@ -15,4 +15,6 @@ export default function useForm({ onSubmit, initialState }) {
   };
 
   return { state, handleChange, handleSubmit };
+
 }
+
