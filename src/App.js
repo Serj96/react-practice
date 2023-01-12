@@ -6,10 +6,15 @@ import { theme } from './Theme/Theme';
 import Basket from 'components/Basket/Basket';
 import Users from 'Users/Users';
 import Posts from 'components/Posts/Posts';
+import AuthForm from 'components/AuthForm/AuthForm';
 function App() {
+  const onSubmitHandler = state => {
+    console.log(state);
+  };
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        <AuthForm onSubmit={onSubmitHandler} />
         <Posts />
         <Users />
         <Statistics title="Statistics" stats={data} />
