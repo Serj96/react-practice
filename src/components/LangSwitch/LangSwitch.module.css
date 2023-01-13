@@ -1,9 +1,9 @@
-
-
 .currentLang {
-    background-color: blue;
+  background-color: blue;
+  color: white;
 }
 
 .lang {
-    background-color: red;
+  background-color: red;
+  color: white;
 }

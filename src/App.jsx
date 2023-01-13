@@ -8,7 +8,7 @@ import Users from 'Users/Users';
 // import Posts from 'components/Posts/Posts';
 import AuthForm from 'components/AuthForm/AuthForm';
 import { LangProvider } from './context/context';
-import { LangSwitch } from 'components/LangSwitch/LangSwitch';
+import { Navigation } from 'components/Navigation/Navigation';
 
 function App() {
   const onSubmitHandler = state => {
@@ -18,7 +18,7 @@ function App() {
     <LangProvider>
       <ThemeProvider theme={theme}>
         <div className="App">
-          <LangSwitch />
+          <Navigation />
           <AuthForm onSubmit={onSubmitHandler} />
           {/* <Posts /> */}
           <Users />
