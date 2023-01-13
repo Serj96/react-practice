@@ -4,7 +4,7 @@ import data from './data/data.json';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './Theme/Theme';
 import Basket from 'components/Basket/Basket';
-import Users from 'Users/Users';
+import Users from 'Pages/Users/Users';
 // import Posts from 'components/Posts/Posts';
 import AuthForm from 'components/AuthForm/AuthForm';
 import { LangProvider } from './context/context';

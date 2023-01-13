@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { nanoid } from 'nanoid';
-import { UserList } from './UserList/UserList';
-import { UserForm } from './UserForm/UserForm';
+import { UserList } from '../../Users/UserList/UserList';
+import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useContext } from 'react';
 import { LangContext } from 'context/context';
-import content from '../content/content.json';
+import content from '../../content/content.json';
 
 const STORAGE_KEY = 'users';
 
