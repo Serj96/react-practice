@@ -1,8 +1,9 @@
-import getPosts from 'services/API';
 import Loader from 'components/Loader/Loader';
 import { useState, useEffect, useCallback } from 'react';
 import Failure from 'components/Failure/Failure';
 import { Section, List, Item, Title } from './Posts.styled';
+import { Link } from 'react-router-dom';
+import { getPosts } from 'services/API';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -30,7 +31,7 @@ const Posts = () => {
   const onClickHandler = () => {
     setPage(prev => prev + 1);
   };
-
+  console.log(posts);
   return (
     <Section>
       <h1>Posts</h1>
@@ -39,10 +40,11 @@ const Posts = () => {
       {posts.length > 0 && (
         <>
           <List>
-            {posts.map(({ title, body }, index) => (
+            {posts.map(({ title, id }, index) => (
               <Item key={index}>
-                <Title>{title}</Title>
-                <p>{body}</p>
+                <Link to={`/posts/${id}`}>
+                  <Title>{title}</Title>
+                </Link>
               </Item>
             ))}
           </List>

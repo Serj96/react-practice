@@ -1,31 +1,28 @@
 import './App.css';
-import Statistics from './components/Statistics/Statistics';
-import data from './data/data.json';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './Theme/Theme';
-import Basket from 'components/Basket/Basket';
 import Users from 'Pages/Users/Users';
-// import Posts from 'components/Posts/Posts';
-import AuthForm from 'components/AuthForm/AuthForm';
 import { LangProvider } from './context/context';
 import { Navigation } from 'components/Navigation/Navigation';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from 'Pages/Home/Home';
+import { Post } from './Pages/Post/Post';
+import Posts from 'Pages/Posts/Posts';
+import { SignUp } from 'Pages/SignUp/SignUp';
 
 function App() {
-  const onSubmitHandler = state => {
-    console.log(state);
-  };
   return (
     <LangProvider>
       <ThemeProvider theme={theme}>
         <div className="App">
           <Navigation />
-          <AuthForm onSubmit={onSubmitHandler} />
-          {/* <Posts /> */}
-          <Users />
-          <Statistics title="Statistics" stats={data} />
-          <hr></hr>
-          {/* <Statistics stats={data} /> */}
-          <Basket />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/posts" element={<Posts />} />
+            <Route path="/posts/:postId" element={<Post />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/sign-up" element={<SignUp />} />
+          </Routes>
         </div>
       </ThemeProvider>
     </LangProvider>
