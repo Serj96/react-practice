@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import useForm from 'hooks/useForm';
 import { Input, Label, Button } from './UserForm.styled';
-import { useContext } from 'react';
-import { LangContext } from 'context/context';
+// import { useContext } from 'react';
+// import { LangContext } from 'context/context';
 import content from '../../content/content.json';
+import useLang from 'hooks/useLang';
 
 const initialState = { name: '', phone: '' };
 
@@ -27,8 +28,9 @@ export const UserForm = ({ onSubmit }) => {
   //   setState(initialState);
   // };
 
-  const { lang } = useContext(LangContext);
+  // const { lang } = useContext(LangContext);
 
+  const { lang } = useLang();
   const nameInputId = useMemo(() => nanoid(), []);
   const phoneInputId = useMemo(() => nanoid(), []);
 

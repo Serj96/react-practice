@@ -1,13 +1,11 @@
-import { LangContext } from "context/context";
-import { useContext } from "react";
-import styles from './LangSwitch.module.css'
-
-
-
+// import { LangContext } from "context/context";
+// import { useContext } from "react";
+import styles from './LangSwitch.module.css';
+import useLang from 'hooks/useLang';
 
 export const LangSwitch = () => {
-
- const {lang, handleChangeLang} = useContext(LangContext)
+  const { lang, handleChangeLang } = useLang();
+  //  const {lang, handleChangeLang} = useContext(LangContext)
   return (
     <div>
       <span

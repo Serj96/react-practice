@@ -3,9 +3,16 @@ import { nanoid } from 'nanoid';
 import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
+<<<<<<< Updated upstream:src/Pages/Users/Users.jsx
 import { useContext } from 'react';
 import { LangContext } from 'context/context';
 import content from '../../content/content.json';
+=======
+// import { useContext } from 'react';
+// import { LangContext } from 'context/context';
+import content from '../content/content.json';
+import useLang from 'hooks/useLang';
+>>>>>>> Stashed changes:src/Users/Users.jsx
 
 const STORAGE_KEY = 'users';
 
@@ -18,8 +25,8 @@ export default function Users() {
     localStorage.setItem(STORAGE_KEY, usersToSave);
   }, [users]);
 
-  const { lang } = useContext(LangContext);
-
+  // const { lang } = useContext(LangContext);
+  const { lang } = useLang();
   const handelDelete = useCallback(id => {
     setUsers(prev => prev.filter(user => user.id !== id));
   }, []);
