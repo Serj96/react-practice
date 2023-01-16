@@ -2,47 +2,77 @@ import Loader from 'components/Loader/Loader';
 import { useState, useEffect, useCallback } from 'react';
 import Failure from 'components/Failure/Failure';
 import { Section } from './Posts.styled';
-import { Link } from 'react-router-dom';
-import { getPosts } from 'services/API';
+import { Link, useSearchParams } from 'react-router-dom';
+import { getPostBySearch } from 'services/API';
 import { PostList } from 'components/PostList/PostList';
+import { Form } from 'components/Form/Form';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  // const [page, setPage] = useState(1);
+  // const [limit] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const fetchPost = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await getPosts(page, limit);
-      setPosts(prev => [...prev, ...data]);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [page, limit]);
+  // const fetchPost = useCallback(async () => {
+  //   setLoading(true);
+  //   try {
+  //     const data = await getPosts(page, limit);
+  //     setPosts(prev => [...prev, ...data]);
+  //   } catch (error) {
+  //     setError(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [page, limit]);
+
+  // useEffect(() => {
+  //   fetchPost();
+  // }, [fetchPost, page]);
+
+  // const onClickHandler = () => {
+  //   setPage(prev => prev + 1);
+  // };
+  // console.log(posts);
+
+  const hangleSubmit = query => {
+    setSearchParams({ q: query });
+    console.log(query);
+  };
+
+  const search = searchParams.get('q');
 
   useEffect(() => {
-    fetchPost();
-  }, [fetchPost, page]);
+    const fetchPost = async () => {
+      setLoading(true);
+      try {
+        const data = await getPostBySearch(search);
+        setPosts(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const onClickHandler = () => {
-    setPage(prev => prev + 1);
-  };
-  console.log(posts);
+    if (search) {
+      fetchPost();
+    }
+  }, [search]);
+
   return (
     <Section>
       <h1>Posts</h1>
       {loading && <Loader />}
       {error && <Failure error={error.message} />}
+      <Form onSubmit={hangleSubmit} />
       {posts.length > 0 && (
         <>
           <PostList posts={posts} />
           {posts.length < 100 && (
-            <button type="button" onClick={onClickHandler}>
+            <button type="button">
+              {/* <button type="button" onClick={onClickHandler}> */}
               Load more
             </button>
           )}

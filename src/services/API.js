@@ -17,3 +17,12 @@ export async function getPostById(postId) {
 
   return data;
 }
+
+export async function getPostBySearch(q) {
+  const { data } = await axios.get('/posts', {
+    params: {
+      q,
+    },
+  });
+  return data;
+}
