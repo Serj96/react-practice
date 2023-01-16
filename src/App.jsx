@@ -4,7 +4,7 @@ import { theme } from './Theme/Theme';
 import Users from 'Pages/Users/Users';
 import { LangProvider } from './context/context';
 import { Navigation } from 'components/Navigation/Navigation';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Home } from 'Pages/Home/Home';
 import { Post } from './Pages/Post/Post';
 import Posts from 'Pages/Posts/Posts';
@@ -22,6 +22,7 @@ function App() {
             <Route path="/posts/:postId" element={<Post />} />
             <Route path="/users" element={<Users />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
       </ThemeProvider>
