@@ -1,9 +1,10 @@
 import Loader from 'components/Loader/Loader';
 import { useState, useEffect, useCallback } from 'react';
 import Failure from 'components/Failure/Failure';
-import { Section, List, Item, Title } from './Posts.styled';
+import { Section } from './Posts.styled';
 import { Link } from 'react-router-dom';
 import { getPosts } from 'services/API';
+import { PostList } from 'components/PostList/PostList';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -39,15 +40,7 @@ const Posts = () => {
       {error && <Failure error={error.message} />}
       {posts.length > 0 && (
         <>
-          <List>
-            {posts.map(({ title, id }, index) => (
-              <Item key={index}>
-                <Link to={`/posts/${id}`}>
-                  <Title>{title}</Title>
-                </Link>
-              </Item>
-            ))}
-          </List>
+          <PostList posts={posts} />
           {posts.length < 100 && (
             <button type="button" onClick={onClickHandler}>
               Load more
