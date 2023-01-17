@@ -3,31 +3,41 @@ import { nanoid } from 'nanoid';
 import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUsers } from 'redux/selectors';
+import { addUser, deleteUser } from 'redux/action';
 // import { useContext } from 'react';
 // import { LangContext } from 'context/context';
 import content from '../../content/content.json';
 import useLang from 'hooks/useLang';
 
-const STORAGE_KEY = 'users';
+// const STORAGE_KEY = 'users';
 
 export default function Users() {
-  const [users, setUsers] = useState(
-    () => JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? []
-  );
-  useEffect(() => {
-    const usersToSave = JSON.stringify(users);
-    localStorage.setItem(STORAGE_KEY, usersToSave);
-  }, [users]);
+  const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
+  // const [users, setUsers] = useState(
+  //   () => JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? []
+  // );
+  // useEffect(() => {
+  //   const usersToSave = JSON.stringify(users);
+  //   localStorage.setItem(STORAGE_KEY, usersToSave);
+  // }, [users]);
 
   // const { lang } = useContext(LangContext);
   const { lang } = useLang();
-  const handelDelete = useCallback(id => {
-    setUsers(prev => prev.filter(user => user.id !== id));
-  }, []);
+  const handelDelete = useCallback(
+    id => {
+      dispatch(deleteUser(id));
+      // setUsers(prev => prev.filter(user => user.id !== id));
+    },
+    [dispatch]
+  );
 
   const handleSubmit = user => {
-    const newUser = { ...user, id: nanoid() };
-    setUsers(prev => [...prev, newUser]);
+    dispatch(addUser(user));
+    // const newUser = { ...user, id: nanoid() };
+    // setUsers(prev => [...prev, newUser]);
   };
   return (
     <Section>
