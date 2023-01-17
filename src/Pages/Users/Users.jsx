@@ -4,8 +4,8 @@ import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsers } from 'redux/selectors';
-import { addUser, deleteUser } from 'redux/action';
+import { selectUsers, selectFilter } from 'redux/selectors';
+import { addUser, deleteUser, filter } from 'redux/action';
 // import { useContext } from 'react';
 // import { LangContext } from 'context/context';
 import content from '../../content/content.json';
@@ -16,6 +16,7 @@ import useLang from 'hooks/useLang';
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
+  const userFilter = useSelector(selectFilter);
   // const [users, setUsers] = useState(
   //   () => JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? []
   // );
@@ -39,13 +40,31 @@ export default function Users() {
     // const newUser = { ...user, id: nanoid() };
     // setUsers(prev => [...prev, newUser]);
   };
+
+  const handleChange = event => {
+    const { value } = event.target;
+    dispatch(filter(value));
+  };
+
+  const handleFilter = () => {
+    if (userFilter) {
+      return users.filter(user =>
+        user.name.toLowerCase().includes(userFilter.toLowerCase())
+      );
+    }
+    return users;
+  };
+
   return (
     <Section>
       <h1>{content.title[lang]}</h1>
       <UserForm onSubmit={handleSubmit} />
       <>
         {users.length > 0 && (
-          <UserList users={users} onHandelDelete={handelDelete} />
+          <>
+            <input type="text" value={userFilter} onChange={handleChange} />
+            <UserList users={handleFilter()} onHandelDelete={handelDelete} />
+          </>
         )}
       </>
     </Section>
