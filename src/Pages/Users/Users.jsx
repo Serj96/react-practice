@@ -5,7 +5,7 @@ import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUsers } from 'redux/users/selectors';
-import { addUser, deleteUser } from 'redux/users/action';
+import { addUser, deleteUser } from 'redux/users/usersSlice';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
 // import { useContext } from 'react';
