@@ -1,5 +1,6 @@
 import { DELETE_USER, ADD_USER } from './actionTypes';
 import { nanoid } from 'nanoid';
+
 export const deleteUser = payload => {
   return { type: DELETE_USER, payload };
 };
