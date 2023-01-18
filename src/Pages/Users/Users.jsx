@@ -1,11 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
-import { nanoid } from 'nanoid';
+import { useCallback } from 'react';
+// import { nanoid } from 'nanoid';
 import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsers, selectFilter } from 'redux/selectors';
-import { addUser, deleteUser, filter } from 'redux/action';
+import { selectUsers } from 'redux/users/selectors';
+import { addUser, deleteUser } from 'redux/users/action';
+import { selectFilter } from 'redux/filter/selectors';
+import { filter } from 'redux/filter/action';
 // import { useContext } from 'react';
 // import { LangContext } from 'context/context';
 import content from '../../content/content.json';
