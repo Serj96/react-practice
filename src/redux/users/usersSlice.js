@@ -3,16 +3,17 @@ import { nanoid } from 'nanoid';
 
 const userSlice = createSlice({
   name: 'users',
-  initialState: [],
+  initialState: { users: [] },
   reducers: {
     addUser: {
       reducer: (store, { payload }) => {
-        store.push(payload);
+        store.users.push(payload);
       },
       prepare: payload => ({ payload: { ...payload, id: nanoid() } }),
     },
-    deleteUser: (store, { payload }) =>
-      store.filter(stor => stor.id !== payload),
+    deleteUser: (store, { payload }) => {
+      store.users = store.users.filter(stor => stor.id !== payload);
+    },
   },
 });
 
