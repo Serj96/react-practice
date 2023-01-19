@@ -4,7 +4,7 @@ import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsers } from 'redux/users/selectors';
+import { selectUsers, selectFilteredUsers } from 'redux/users/selectors';
 // import { addUser, deleteUser } from 'redux/users/usersSlice';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
@@ -18,8 +18,9 @@ import useLang from 'hooks/useLang';
 
 export default function Users() {
   const dispatch = useDispatch();
-  const users = useSelector(selectUsers);
+  const users = useSelector(selectFilteredUsers);
   const userFilter = useSelector(selectFilter);
+
   // const [users, setUsers] = useState(
   //   () => JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? []
   // );
@@ -41,7 +42,13 @@ export default function Users() {
   );
 
   const handleSubmit = user => {
-    dispatch(addUser(user));
+    const checkUser = users.find(
+      userItem => userItem.name === user.name || userItem.phone === user.phone
+    );
+    checkUser
+      ? alert(`${user.name} already in your contacts`)
+      : dispatch(addUser(user));
+
     // const newUser = { ...user, id: nanoid() };
     // setUsers(prev => [...prev, newUser]);
   };
