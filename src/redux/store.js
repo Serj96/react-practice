@@ -5,6 +5,7 @@ import { usersReducer } from './users/reducer';
 import { filterReducer } from './filter/reducer';
 import { configureStore } from '@reduxjs/toolkit';
 // import usersReducer from './users/usersSlice';
+
 const persistConfige = {
   key: 'users',
   storage,

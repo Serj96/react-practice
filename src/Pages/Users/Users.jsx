@@ -5,10 +5,10 @@ import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUsers } from 'redux/users/selectors';
-import { addUser, deleteUser } from 'redux/users/usersSlice';
+// import { addUser, deleteUser } from 'redux/users/usersSlice';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
-import { fetchUsers } from 'redux/users/operations';
+import { fetchUsers, addUser, removeUser } from 'redux/users/operations';
 // import { useContext } from 'react';
 // import { LangContext } from 'context/context';
 import content from '../../content/content.json';
@@ -33,7 +33,8 @@ export default function Users() {
   const { lang } = useLang();
   const handelDelete = useCallback(
     id => {
-      dispatch(deleteUser(id));
+      dispatch(removeUser(id));
+      // dispatch(deleteUser(id));
       // setUsers(prev => prev.filter(user => user.id !== id));
     },
     [dispatch]

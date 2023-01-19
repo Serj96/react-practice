@@ -1,7 +1,17 @@
 import { DELETE_USER, ADD_USER } from './actionTypes';
 import { createReducer } from '@reduxjs/toolkit';
 import { addUser, deleteUser } from './action';
-import { getUsersError, getUsersLoading, getUsersSuccess } from './action';
+import {
+  getUsersError,
+  getUsersLoading,
+  getUsersSuccess,
+  addUserLoading,
+  addUserSuccess,
+  addUserError,
+  removeUserError,
+  removeUserLoading,
+  removeUserSuccess,
+} from './action';
 
 const initionalState = {
   users: [],
@@ -25,6 +35,30 @@ export const usersReducer = createReducer(initionalState, {
     store.loading = false;
   },
   [getUsersError]: (store, { payload }) => {
+    store.error = payload;
+    store.loading = false;
+  },
+  [addUserLoading]: store => {
+    store.loading = true;
+    store.error = null;
+  },
+  [addUserSuccess]: (store, { payload }) => {
+    store.users.unshift(payload);
+    store.loading = false;
+  },
+  [addUserError]: (store, { payload }) => {
+    store.error = payload;
+    store.loading = false;
+  },
+  [removeUserLoading]: store => {
+    store.loading = true;
+    store.error = null;
+  },
+  [removeUserSuccess]: (store, { payload }) => {
+    store.users = store.users.filter(user => user.id !== payload.id);
+    store.loading = false;
+  },
+  [removeUserError]: (store, { payload }) => {
     store.error = payload;
     store.loading = false;
   },
