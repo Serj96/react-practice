@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 // import { nanoid } from 'nanoid';
 import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
@@ -8,6 +8,7 @@ import { selectUsers } from 'redux/users/selectors';
 import { addUser, deleteUser } from 'redux/users/usersSlice';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
+import { fetchUsers } from 'redux/users/operations';
 // import { useContext } from 'react';
 // import { LangContext } from 'context/context';
 import content from '../../content/content.json';
@@ -22,10 +23,11 @@ export default function Users() {
   // const [users, setUsers] = useState(
   //   () => JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? []
   // );
-  // useEffect(() => {
-  //   const usersToSave = JSON.stringify(users);
-  //   localStorage.setItem(STORAGE_KEY, usersToSave);
-  // }, [users]);
+  useEffect(() => {
+    // const usersToSave = JSON.stringify(users);
+    // localStorage.setItem(STORAGE_KEY, usersToSave);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   // const { lang } = useContext(LangContext);
   const { lang } = useLang();

@@ -8,6 +8,10 @@ export const addUser = createAction('add/user', payload => ({
   payload: { ...payload, id: nanoid() },
 }));
 
+export const getUsersLoading = createAction('users/getLoading');
+export const getUsersSuccess = createAction('users/getSuccess');
+export const getUsersError = createAction('users/getError');
+
 // export const deleteUser = payload => {
 //   return { type: DELETE_USER, payload };
 // };
