@@ -14,11 +14,11 @@ import {
 } from 'redux/users/selectors';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
-import { addUser, removeUser } from 'redux/users/operations';
+// import { removeUser } from 'redux/users/operations';
 import content from '../../content/content.json';
 import useLang from 'hooks/useLang';
 import Loader from 'components/Loader/Loader';
-import { fetchUsers, addUsers } from 'redux/users/usersAsyncThunc';
+import { fetchUsers, addUsers, removeUser } from 'redux/users/usersAsyncThunc';
 
 // const STORAGE_KEY = 'users';
 
@@ -78,7 +78,7 @@ export default function Users() {
       <>
         {isLoading && <Loader />}
         {isError && alert('Something went wrong... Please, try again later')}
-        {users.length > 0 && (
+        {users?.length > 0 && (
           <>
             <input type="text" value={userFilter} onChange={handleChange} />
             <UserList users={handleFilter()} onHandelDelete={handelDelete} />
