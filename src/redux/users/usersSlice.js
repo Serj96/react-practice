@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers } from './usersAsyncThunc';
+import { fetchUsers, addUsers } from './usersAsyncThunc';
 
 const userSlice = createSlice({
   name: 'users',
@@ -16,6 +16,18 @@ const userSlice = createSlice({
     [fetchUsers.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
+    },
+    [addUsers.pending]: state => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [addUsers.fulfilled]: (state, { payload }) => {
+      state.users.unshift(payload);
+      state.isLoading = false;
+    },
+    [addUsers.error]: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
     },
   },
   // reducers: {

@@ -1,5 +1,8 @@
-import { useCallback, useEffect } from 'react';
+// import { useContext } from 'react';
 // import { nanoid } from 'nanoid';
+// import { addUser, deleteUser } from 'redux/users/usersSlice';
+// import { LangContext } from 'context/context';
+import { useCallback, useEffect } from 'react';
 import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
@@ -9,16 +12,13 @@ import {
   selectFilteredUsers,
   selectLoading,
 } from 'redux/users/selectors';
-// import { addUser, deleteUser } from 'redux/users/usersSlice';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
 import { addUser, removeUser } from 'redux/users/operations';
-// import { useContext } from 'react';
-// import { LangContext } from 'context/context';
 import content from '../../content/content.json';
 import useLang from 'hooks/useLang';
 import Loader from 'components/Loader/Loader';
-import { fetchUsers } from 'redux/users/usersAsyncThunc';
+import { fetchUsers, addUsers } from 'redux/users/usersAsyncThunc';
 
 // const STORAGE_KEY = 'users';
 
@@ -50,12 +50,7 @@ export default function Users() {
   );
 
   const handleSubmit = user => {
-    const checkUser = users.find(
-      userItem => userItem.name === user.name || userItem.phone === user.phone
-    );
-    checkUser
-      ? alert(`${user.name} already in your contacts`)
-      : dispatch(addUser(user));
+    dispatch(addUsers(user));
 
     // const newUser = { ...user, id: nanoid() };
     // setUsers(prev => [...prev, newUser]);
