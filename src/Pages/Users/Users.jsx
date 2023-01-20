@@ -4,15 +4,21 @@ import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
 import { Section } from './Users.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUsers, selectFilteredUsers } from 'redux/users/selectors';
+import {
+  selectError,
+  selectFilteredUsers,
+  selectLoading,
+} from 'redux/users/selectors';
 // import { addUser, deleteUser } from 'redux/users/usersSlice';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
-import { fetchUsers, addUser, removeUser } from 'redux/users/operations';
+import { addUser, removeUser } from 'redux/users/operations';
 // import { useContext } from 'react';
 // import { LangContext } from 'context/context';
 import content from '../../content/content.json';
 import useLang from 'hooks/useLang';
+import Loader from 'components/Loader/Loader';
+import { fetchUsers } from 'redux/users/usersAsyncThunc';
 
 // const STORAGE_KEY = 'users';
 
@@ -20,6 +26,8 @@ export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector(selectFilteredUsers);
   const userFilter = useSelector(selectFilter);
+  const isLoading = useSelector(selectLoading);
+  const isError = useSelector(selectError);
 
   // const [users, setUsers] = useState(
   //   () => JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? []
@@ -70,8 +78,11 @@ export default function Users() {
   return (
     <Section>
       <h1>{content.title[lang]}</h1>
+
       <UserForm onSubmit={handleSubmit} />
       <>
+        {isLoading && <Loader />}
+        {isError && alert('Something went wrong... Please, try again later')}
         {users.length > 0 && (
           <>
             <input type="text" value={userFilter} onChange={handleChange} />
