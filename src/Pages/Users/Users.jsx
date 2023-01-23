@@ -2,6 +2,7 @@
 // import { nanoid } from 'nanoid';
 // import { addUser, deleteUser } from 'redux/users/usersSlice';
 // import { LangContext } from 'context/context';
+// import { removeUser } from 'redux/users/operations';
 import { useCallback, useEffect } from 'react';
 import { UserList } from '../../Users/UserList/UserList';
 import { UserForm } from '../../Users/UserForm/UserForm';
@@ -14,7 +15,6 @@ import {
 } from 'redux/users/selectors';
 import { selectFilter } from 'redux/filter/selectors';
 import { filter } from 'redux/filter/action';
-// import { removeUser } from 'redux/users/operations';
 import content from '../../content/content.json';
 import useLang from 'hooks/useLang';
 import Loader from 'components/Loader/Loader';

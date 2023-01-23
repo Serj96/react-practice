@@ -6,6 +6,7 @@
 import { filterReducer } from './filter/reducer';
 import { configureStore } from '@reduxjs/toolkit';
 import usersReducer from './users/usersSlice';
+import authReducer from './auth/authSlice';
 
 // const persistConfige = {
 //   key: 'users',
@@ -17,6 +18,7 @@ export const store = configureStore({
   reducer: {
     users: usersReducer,
     filter: filterReducer,
+    auth: authReducer,
   },
 });
 // export const persistor = persistStore(store);
