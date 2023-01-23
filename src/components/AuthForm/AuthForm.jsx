@@ -1,9 +1,11 @@
 // import { useState } from 'react';
 import useForm from 'hooks/useForm';
 
-const initialState = { name: '', email: '' };
+const initialLoginState = { email: '', password: '' };
+const initialSignUpState = { name: '', email: '', password: '' };
 
-export default function AuthForm({ onSubmit }) {
+export default function AuthForm({ onSubmit, isSignUp }) {
+  const initialState = isSignUp ? initialSignUpState : initialLoginState;
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
@@ -23,19 +25,29 @@ export default function AuthForm({ onSubmit }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        {isSignUp && (
+          <input
+            type="text"
+            value={state.name}
+            name="name"
+            onChange={handleChange}
+          />
+        )}
+
         <input
-          type="text"
-          value={state.name}
-          name="name"
-          onChange={handleChange}
-        ></input>
-        <input
-          type="text"
+          type="email"
           value={state.email}
           name="email"
           onChange={handleChange}
-        ></input>
-        <button>Submit</button>
+        />
+        <input
+          type="password"
+          value={state.email}
+          name="password"
+          onChange={handleChange}
+        />
+
+        <button>{isSignUp ? 'Sign up' : 'Login'}</button>
       </form>
     </>
   );

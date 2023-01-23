@@ -8,6 +8,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { Home } from 'Pages/Home/Home';
 import { Post } from './Pages/Post/Post';
 import Posts from 'Pages/Posts/Posts';
+import Login from 'Pages/Login/Login';
 import { SignUp } from 'Pages/SignUp/SignUp';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/posts/:postId" element={<Post />} />
             <Route path="/users" element={<Users />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
