@@ -22,10 +22,39 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = payload.user;
         state.token = payload.token;
+        state.isLogin = true;
       })
-      .addCase(signUp.rejected, (state, { payload }) => {
+      .addCase(signUp.rejected, (state, { error }) => {
         state.isLoading = false;
-        state.error = payload;
+        state.error = error.message;
+      })
+      .addCase(login.pending, (state, { payload }) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLogin = true;
+      })
+      .addCase(login.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.error = error.message;
+      })
+      .addCase(logout.pending, (state, { payload }) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logout.fulfilled, state => {
+        state.isLoading = false;
+        state.isLogin = false;
+        state.user = {};
+        state.token = '';
+      })
+      .addCase(logout.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.error = error.message;
       });
   },
 });

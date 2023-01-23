@@ -1,5 +1,7 @@
 // import { useState } from 'react';
 import useForm from 'hooks/useForm';
+import { useSelector } from 'react-redux';
+import { selectError } from './../../redux/auth/authSelector';
 
 const initialLoginState = { email: '', password: '' };
 const initialSignUpState = { name: '', email: '', password: '' };
@@ -10,6 +12,7 @@ export default function AuthForm({ onSubmit, isSignUp }) {
     initialState,
     onSubmit,
   });
+  const error = useSelector(selectError);
 
   // const [state, setState] = useState(initialState);
 
@@ -42,13 +45,14 @@ export default function AuthForm({ onSubmit, isSignUp }) {
         />
         <input
           type="password"
-          value={state.email}
+          value={state.password}
           name="password"
           onChange={handleChange}
         />
 
         <button>{isSignUp ? 'Sign up' : 'Login'}</button>
       </form>
+      {error && <p>Invalid data types</p>}
     </>
   );
 }
