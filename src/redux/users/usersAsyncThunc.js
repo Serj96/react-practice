@@ -41,7 +41,7 @@ export const addUsers = createAsyncThunk(
       const state = thunkAPI.getState();
       const { users } = state;
       const isUserExist = users.users.find(
-        person => person.name === user.name || person.phone === user.phone
+        person => person.name === user.name || person.number === user.number
       );
       if (isUserExist) {
         alert(`${user.name} already in your contacts`);

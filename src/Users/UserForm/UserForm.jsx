@@ -7,7 +7,7 @@ import { Input, Label, Button } from './UserForm.styled';
 import content from '../../content/content.json';
 import useLang from 'hooks/useLang';
 
-const initialState = { name: '', phone: '' };
+const initialState = { name: '', number: '' };
 
 export const UserForm = ({ onSubmit }) => {
   const { state, handleChange, handleSubmit } = useForm({
@@ -34,7 +34,7 @@ export const UserForm = ({ onSubmit }) => {
   const nameInputId = useMemo(() => nanoid(), []);
   const phoneInputId = useMemo(() => nanoid(), []);
 
-  const { name, phone } = state;
+  const { name, number } = state;
 
   return (
     <form action="" onSubmit={handleSubmit}>
@@ -49,8 +49,8 @@ export const UserForm = ({ onSubmit }) => {
       <Label htmlFor={phoneInputId}>{content.phone[lang]}</Label>
       <Input
         type="tel"
-        name="phone"
-        value={phone}
+        name="number"
+        value={number}
         onChange={handleChange}
         id={phoneInputId}
       />

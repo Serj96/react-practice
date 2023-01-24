@@ -7,7 +7,7 @@ export function UserList({ users, onHandelDelete }) {
         <li key={user.id}>
           <UserItem
             name={user.name}
-            phone={user.phone}
+            phone={user.number}
             onHandelDelete={onHandelDelete}
             id={user.id}
           />

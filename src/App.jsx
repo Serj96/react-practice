@@ -10,6 +10,7 @@ import { Post } from './Pages/Post/Post';
 import Posts from 'Pages/Posts/Posts';
 import Login from 'Pages/Login/Login';
 import { SignUp } from 'Pages/SignUp/SignUp';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -19,9 +20,12 @@ function App() {
           <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
+
             <Route path="/posts" element={<Posts />} />
             <Route path="/posts/:postId" element={<Post />} />
-            <Route path="/users" element={<Users />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/users" element={<Users />} />
+            </Route>
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate to="/" />} />
