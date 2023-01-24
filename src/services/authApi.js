@@ -29,7 +29,8 @@ export const logout = async user => {
   return data;
 };
 
-export const currentUser = async user => {
-  const { data } = await instanceAuth.get('/users/current', user);
+export const currentUser = async userToken => {
+  token.set(userToken);
+  const { data } = await instanceAuth.get('/users/current');
   return data;
 };

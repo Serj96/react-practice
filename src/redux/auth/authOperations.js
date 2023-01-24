@@ -16,7 +16,17 @@ export const logout = createAsyncThunk('auth/logout', async user => {
   return data;
 });
 
-export const currentUser = createAsyncThunk('auth/signup', async user => {
-  const data = await API.currentUser(user);
-  return data;
-});
+export const currentUser = createAsyncThunk(
+  'auth/current',
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState();
+    const userToken = state.auth.token;
+    if (!userToken) return rejectWithValue();
+    try {
+      const data = await API.currentUser(userToken);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
